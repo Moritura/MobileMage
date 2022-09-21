@@ -49,7 +49,7 @@ namespace Draw
                 step = Math.Sign(deltaY);
             }
 
-            Vector2 stepVector = new Vector2(deltaX / step, deltaY / step);
+            Vector2 stepVector = new Vector2((float)deltaX / (float)count * step, (float)deltaY / (float)count * step);
 
             Vector2 currentPoint = lastPoint;
 
@@ -58,8 +58,6 @@ namespace Draw
                 currentPoint += stepVector;
                 data.Points.Add(new Vector2Int(Mathf.RoundToInt(currentPoint.x), Mathf.RoundToInt(currentPoint.y)));
             }
-
-            data.Points.Add(point);
 
             UpdateLineEvent?.Invoke(data);
         }
