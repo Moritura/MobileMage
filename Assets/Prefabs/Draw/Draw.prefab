@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9204266415363374045}
   - component: {fileID: 9204266415363374042}
   - component: {fileID: 9204266415363374043}
+  - component: {fileID: 4543616085967711898}
   m_Layer: 5
   m_Name: Draw
   m_TagString: Untagged
@@ -86,6 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b681a2da13431fb48a3b9e54412cc63a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useLog: 0
 --- !u!114 &9204266415363374043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,6 +100,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0883ba7e8fcbf5e4bbd4c485ba503d9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  input: {fileID: 9204266415363374042}
+--- !u!114 &4543616085967711898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9204266415363374041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5cf14101fb6cd41ae6651398ce693f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   drawImage: {fileID: 9204266415363374045}
-  inputData: {fileID: 9204266415363374042}
+  lineController: {fileID: 9204266415363374043}
   color: {r: 0, g: 0, b: 0, a: 0}

@@ -6,8 +6,8 @@ namespace Draw
 {
     public class InputData : MonoBehaviour
     {
-        public event Action StartInputEvent;
-        public event Action<Vector2> InputEvent;
+        public event Action<Vector2Int> StartInputEvent;
+        public event Action<Vector2Int> InputEvent;
         public event Action EndInputEvent;
 
         [SerializeField] private bool useLog;
@@ -16,7 +16,7 @@ namespace Draw
         {
             if (useLog)
             {
-                StartInputEvent += () => Debug.Log("Start " + Input.mousePosition);
+                StartInputEvent += (x) => Debug.Log("Start " + x);
                 InputEvent += (x) => Debug.Log("Draw " + x);
                 EndInputEvent += () => Debug.Log("End " + Input.mousePosition);
             }
@@ -31,12 +31,12 @@ namespace Draw
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN
             if (Input.GetMouseButtonDown(0))
             {
-                StartInputEvent?.Invoke();
+                StartInputEvent?.Invoke(new Vector2Int((int)Input.mousePosition.x, (int)Input.mousePosition.y));
             }
 
             if (Input.GetMouseButton(0))
             {
-                InputEvent?.Invoke(Input.mousePosition);
+                InputEvent?.Invoke(new Vector2Int ((int)Input.mousePosition.x, (int)Input.mousePosition.y));
             }
 
             if (Input.GetMouseButtonUp(0))
@@ -50,7 +50,7 @@ namespace Draw
             if (previousTouch == null && Input.touchCount > 0)
             {
                 previousTouch = Input.touches[0];
-                StartInputEvent?.Invoke();
+                StartInputEvent?.Invoke(new Vector2Int ((int)previousTouch.position.x, (int)previousTouch.position.y));
                 InputEvent?.Invoke(previousTouch.Value.position);
             }
             else if (previousTouch != null)
@@ -58,7 +58,7 @@ namespace Draw
                 Touch currentTouch = Input.touches.FirstOrDefault((x) => x.fingerId == previousTouch.Value.fingerId);
                 if (currentTouch.fingerId == previousTouch.Value.fingerId)
                 {
-                    InputEvent?.Invoke(currentTouch.position);
+                    InputEvent?.Invoke(new Vector2Int ((int)currentTouch.position.x, (int)currentTouch.position.y));
                     previousTouch = currentTouch;
                 }
                 else

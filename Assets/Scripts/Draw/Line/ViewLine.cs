@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 namespace Draw
 {
-    public class DrawController : MonoBehaviour
+    public class ViewLine : MonoBehaviour
     {
         [SerializeField] private RawImage drawImage;
-        [SerializeField] private InputData inputData;
+        [SerializeField] private LineController lineController;
         [SerializeField] private Color color;
 
         private Texture2D texture;
@@ -14,7 +14,7 @@ namespace Draw
         private void Awake()
         {
             Init();
-            inputData.InputEvent += Drawing;
+            lineController.EndLineEvent += Drawing;
         }
 
         private void Init()
@@ -23,9 +23,13 @@ namespace Draw
             drawImage.texture = texture;
         }
 
-        private void Drawing(Vector2 point)
+        private void Drawing(LineData data)
         {
-            texture.SetPixel((int)point.x, (int)point.y, color);
+            foreach (var point in data.Points)
+            {
+                texture.SetPixel(point.x, point.y, color);
+            }
+
             texture.Apply();
         }
     }
